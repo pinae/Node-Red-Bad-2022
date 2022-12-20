@@ -1,0 +1,2842 @@
+[
+    {
+        "id": "cb18316975319a9f",
+        "type": "subflow",
+        "name": "WLED Command",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 180,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "5ef50a3d8ab574cf"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 520,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "5ef50a3d8ab574cf",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "topic",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-server"
+                }
+            },
+            {
+                "name": "priority",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-warning"
+                }
+            },
+            {
+                "name": "power",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-power-off"
+                }
+            },
+            {
+                "name": "preset",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-list-ol"
+                }
+            },
+            {
+                "name": "brightness",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-lightbulb-o"
+                }
+            },
+            {
+                "name": "effect_index",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-asterisk"
+                }
+            },
+            {
+                "name": "effect_speed",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-fast-forward"
+                }
+            },
+            {
+                "name": "effect_intensity",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "transition",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-clock-o"
+                }
+            },
+            {
+                "name": "color1",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "color2",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "color3",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "delay",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-hourglass-2"
+                }
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "5ef50a3d8ab574cf",
+        "type": "change",
+        "z": "cb18316975319a9f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t  \"power\": $env(\"power\") ? $env(\"power\") : payload.power,\t  \"brightness\": $env(\"brightness\") ? $env(\"brightness\") : payload.brightness,\t  \"preset\": $env(\"preset\") ? $env(\"preset\") : payload.preset,\t  \"effect_index\": $env(\"effect_index\") ? $env(\"effect_index\") : payload.effect_index,\t  \"effect_speed\": $env(\"effect_speed\") ? $env(\"effect_speed\") : payload.effect_speed,\t  \"effect_intensity\": $env(\"effect_intensity\") ? $env(\"effect_intensity\") : payload.effect_intensity,\t  \"color1\": $env(\"color1\") ? $env(\"color1\") : payload.color1,\t  \"color2\": $env(\"color2\") ? $env(\"color2\") : payload.color2,\t  \"color3\": $env(\"color3\") ? $env(\"color3\") : payload.color3\t}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "$env(\"topic\") ? $env(\"topic\") : topic",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "priority",
+                "pt": "msg",
+                "to": "$env(\"priority\") ? $env(\"priority\") : priority",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "$env(\"delay\") ? $env(\"delay\") : delay",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "transition",
+                "pt": "msg",
+                "to": "transition",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 275,
+        "y": 220,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "00069840f129e0d9",
+        "type": "subflow",
+        "name": "WLED in/out wrapper",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 200,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "a4907e9c024b77c3"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 540,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "1afd96c8cafff4aa",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "API",
+                "type": "env",
+                "value": "${TOPIC}/api"
+            },
+            {
+                "name": "G",
+                "type": "env",
+                "value": "${TOPIC}/g"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "a4907e9c024b77c3",
+        "type": "mqtt out",
+        "z": "00069840f129e0d9",
+        "name": "WLED",
+        "topic": "${API}",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "64ef731ad709e5af",
+        "x": 390,
+        "y": 180,
+        "wires": [],
+        "icon": "font-awesome/fa-ellipsis-h"
+    },
+    {
+        "id": "1afd96c8cafff4aa",
+        "type": "mqtt in",
+        "z": "00069840f129e0d9",
+        "name": "WLED",
+        "topic": "${G}",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "64ef731ad709e5af",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 390,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "75daca353c3848d5",
+        "type": "subflow",
+        "name": "myWLED",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "f69e1822147b7b83"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1080,
+                "y": 400,
+                "wires": [
+                    {
+                        "id": "5141e61674a4f454",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "TOPIC",
+                "type": "str",
+                "value": "bathroom/wled_bathroom",
+                "ui": {
+                    "icon": "font-awesome/fa-server",
+                    "label": {
+                        "en-US": "Topic"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "str"
+                        ]
+                    }
+                }
+            }
+        ],
+        "meta": {},
+        "color": "#3FADB5",
+        "icon": "node-red-contrib-wled3/wled.png",
+        "status": {
+            "x": 1080,
+            "y": 300,
+            "wires": [
+                {
+                    "id": "ede48df7aa41e312",
+                    "port": 0
+                },
+                {
+                    "id": "61e0d0611e9ed191",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "904af360097e0f4c",
+        "type": "trigger",
+        "z": "75daca353c3848d5",
+        "g": "82b4d373dfb162dc",
+        "name": "",
+        "op1": "",
+        "op2": "0",
+        "op1type": "pay",
+        "op2type": "str",
+        "duration": "7",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 2,
+        "x": 180,
+        "y": 300,
+        "wires": [
+            [],
+            [
+                "06bdec433eaa9d4b"
+            ]
+        ]
+    },
+    {
+        "id": "b219a4f4b8424ed6",
+        "type": "change",
+        "z": "75daca353c3848d5",
+        "g": "82b4d373dfb162dc",
+        "name": "Set flow.origin = topic",
+        "rules": [
+            {
+                "t": "set",
+                "p": "origin",
+                "pt": "flow",
+                "to": "topic",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 220,
+        "y": 260,
+        "wires": [
+            [
+                "904af360097e0f4c",
+                "74a90909335b87f5"
+            ]
+        ]
+    },
+    {
+        "id": "06bdec433eaa9d4b",
+        "type": "change",
+        "z": "75daca353c3848d5",
+        "g": "82b4d373dfb162dc",
+        "name": "Set flow.origin = \"external\"",
+        "rules": [
+            {
+                "t": "set",
+                "p": "origin",
+                "pt": "flow",
+                "to": "external",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b1a635ac74177f2e",
+        "type": "subflow:00069840f129e0d9",
+        "z": "75daca353c3848d5",
+        "name": "",
+        "x": 540,
+        "y": 300,
+        "wires": [
+            [
+                "2b6a203be42eaf06"
+            ]
+        ]
+    },
+    {
+        "id": "2b6a203be42eaf06",
+        "type": "change",
+        "z": "75daca353c3848d5",
+        "g": "82b4d373dfb162dc",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "origin",
+                "pt": "msg",
+                "to": "origin",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 200,
+        "y": 400,
+        "wires": [
+            [
+                "5141e61674a4f454"
+            ]
+        ]
+    },
+    {
+        "id": "f07994d7e510433f",
+        "type": "comment",
+        "z": "75daca353c3848d5",
+        "name": "Keep priority queue of active WLED setting",
+        "info": "",
+        "x": 240,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ede48df7aa41e312",
+        "type": "template",
+        "z": "75daca353c3848d5",
+        "g": "624792b8e4d94416",
+        "name": "\"extern\" brightness",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n  \"text\": \"extern {{ payload }}\",\n  \"fill\": \"blue\"\n}",
+        "output": "json",
+        "x": 910,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ba2af76bcbce4370",
+        "type": "switch",
+        "z": "75daca353c3848d5",
+        "g": "96cf7df02759efd2",
+        "name": "Is external?",
+        "property": "origin",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "external",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 460,
+        "wires": [
+            [
+                "6f7968c5d1950a9b",
+                "ede48df7aa41e312"
+            ]
+        ]
+    },
+    {
+        "id": "64cc8745ebed4b49",
+        "type": "change",
+        "z": "75daca353c3848d5",
+        "g": "96cf7df02759efd2",
+        "name": "Set flow.is_external = True",
+        "rules": [
+            {
+                "t": "set",
+                "p": "is_external",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f7968c5d1950a9b",
+        "type": "switch",
+        "z": "75daca353c3848d5",
+        "g": "96cf7df02759efd2",
+        "name": "brightness > 0?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 500,
+        "y": 500,
+        "wires": [
+            [
+                "64cc8745ebed4b49"
+            ],
+            [
+                "9dbe5ae9371f6c70"
+            ]
+        ]
+    },
+    {
+        "id": "9dbe5ae9371f6c70",
+        "type": "change",
+        "z": "75daca353c3848d5",
+        "g": "96cf7df02759efd2",
+        "name": "Set flow.is_external = False and clear flow.active",
+        "rules": [
+            {
+                "t": "set",
+                "p": "is_external",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "active",
+                "pt": "flow",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f69e1822147b7b83",
+        "type": "function",
+        "z": "75daca353c3848d5",
+        "name": "Priority stack",
+        "func": "var active = flow.get(\"active\");\nvar priority = parseInt(msg.priority || \"0\");\n\n\nif (msg.payload == \"reset\") { \n    // clear active context\n    flow.set(\"active\", {});\n    msg.priority = 999;\n    msg.payload = {\"power\":0};\n    msg.topic = \"reset\";\n    return msg;\n} else if (msg.payload == \"off\") {\n    // if topic not found then ignore\n    if (active[msg.topic] === undefined) {\n        return null;\n    }\n    // remove from active context\n    delete active[msg.topic];\n} else {\n    // add to context\n    active[msg.topic] = [priority, Date.now(), msg.payload];\n}\n\n\n// clear out entries that are older than 2 hours\nvar too_long_ago = new Date();\ntoo_long_ago.setHours(too_long_ago.getHours() - 2);\nfor (const topic in active) {\n  if (active[topic][1] < too_long_ago) {\n      delete active[topic];\n  }\n}\n\n\n// make sure the flow var is updated \nflow.set(\"active\", active);\n\n\n// find the remaining entry with the highest priority\nmsg.priority = -1;\nmsg.payload = {\"power\":0};\nmsg.topic = \"empty\";\n\nfor (const topic in active) {\n  if (active[topic][0] > msg.priority ) {\n      msg.topic = topic; \n      msg.priority = active[topic][0];\n      msg.payload = active[topic][2];\n  }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"active\", {});\nflow.set(\"origin\", \"external\");",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 100,
+        "wires": [
+            [
+                "275301bb2099e99e"
+            ]
+        ]
+    },
+    {
+        "id": "4414302f29b0ca0d",
+        "type": "switch",
+        "z": "75daca353c3848d5",
+        "name": "WLED is NOT externally set",
+        "property": "is_external",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 480,
+        "y": 140,
+        "wires": [
+            [
+                "fdf0ecec23fc3201"
+            ]
+        ]
+    },
+    {
+        "id": "ac95bc5e877e018d",
+        "type": "switch",
+        "z": "75daca353c3848d5",
+        "name": "Topic == \"reset\"?",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "reset",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 100,
+        "wires": [
+            [
+                "1de92caa0adca0a8"
+            ]
+        ]
+    },
+    {
+        "id": "1de92caa0adca0a8",
+        "type": "change",
+        "z": "75daca353c3848d5",
+        "name": "Set flow.is_external = False",
+        "rules": [
+            {
+                "t": "set",
+                "p": "is_external",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 100,
+        "wires": [
+            [
+                "fdf0ecec23fc3201"
+            ]
+        ]
+    },
+    {
+        "id": "61e0d0611e9ed191",
+        "type": "template",
+        "z": "75daca353c3848d5",
+        "g": "624792b8e4d94416",
+        "name": "topic !priority",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n  \"text\": \"{{ topic }} !{{ priority }}\",\n  \"fill\": \"green\"\n}",
+        "output": "json",
+        "x": 890,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "74a90909335b87f5",
+        "type": "function",
+        "z": "75daca353c3848d5",
+        "name": "Format API call",
+        "func": "var api_string = \"win\";\n\nif (\"transition\" in msg) {\n    api_string += \"&TT=\" + msg.transition;\n}\n\n\nconst command_map = new Map();\ncommand_map.set('power', 'T');\ncommand_map.set('preset', 'PL');\ncommand_map.set('brightness', 'A');\ncommand_map.set('effect_index', 'FX');\ncommand_map.set('effect_speed', 'SX');\ncommand_map.set('effect_intensity', 'SI');\ncommand_map.set('color1', 'CL');\ncommand_map.set('color2', 'C2');\ncommand_map.set('color3', 'C3');\n\nfor (const [key, cmd] of command_map) {\n    if (key in msg.payload) {\n      api_string += \"&\" + cmd + \"=\" + msg.payload[key];\n    }\n}\n\nmsg.payload = api_string;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 260,
+        "wires": [
+            [
+                "61e0d0611e9ed191",
+                "b1a635ac74177f2e"
+            ]
+        ]
+    },
+    {
+        "id": "275301bb2099e99e",
+        "type": "junction",
+        "z": "75daca353c3848d5",
+        "x": 320,
+        "y": 100,
+        "wires": [
+            [
+                "ac95bc5e877e018d",
+                "4414302f29b0ca0d"
+            ]
+        ]
+    },
+    {
+        "id": "fdf0ecec23fc3201",
+        "type": "junction",
+        "z": "75daca353c3848d5",
+        "x": 820,
+        "y": 140,
+        "wires": [
+            [
+                "90d8a0396a3d218a"
+            ]
+        ]
+    },
+    {
+        "id": "90d8a0396a3d218a",
+        "type": "junction",
+        "z": "75daca353c3848d5",
+        "x": 60,
+        "y": 220,
+        "wires": [
+            [
+                "b219a4f4b8424ed6"
+            ]
+        ]
+    },
+    {
+        "id": "5141e61674a4f454",
+        "type": "junction",
+        "z": "75daca353c3848d5",
+        "x": 360,
+        "y": 400,
+        "wires": [
+            [
+                "ba2af76bcbce4370"
+            ]
+        ]
+    },
+    {
+        "id": "82b4d373dfb162dc",
+        "type": "group",
+        "z": "75daca353c3848d5",
+        "name": "Keep track of the origin of a status change",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "904af360097e0f4c",
+            "b219a4f4b8424ed6",
+            "06bdec433eaa9d4b",
+            "2b6a203be42eaf06"
+        ],
+        "x": 94,
+        "y": 219,
+        "w": 272,
+        "h": 222
+    },
+    {
+        "id": "624792b8e4d94416",
+        "type": "group",
+        "z": "75daca353c3848d5",
+        "name": "Format status message",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ede48df7aa41e312",
+            "61e0d0611e9ed191"
+        ],
+        "x": 794,
+        "y": 219,
+        "w": 232,
+        "h": 122
+    },
+    {
+        "id": "96cf7df02759efd2",
+        "type": "group",
+        "z": "75daca353c3848d5",
+        "name": "Maybe update flow.is_external",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ba2af76bcbce4370",
+            "64cc8745ebed4b49",
+            "6f7968c5d1950a9b",
+            "9dbe5ae9371f6c70"
+        ],
+        "x": 394,
+        "y": 419,
+        "w": 632,
+        "h": 142
+    },
+    {
+        "id": "d399aa74f25a7387",
+        "type": "tab",
+        "label": "Bathroom",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "34dc24c24a2fc1b1",
+        "type": "group",
+        "z": "d399aa74f25a7387",
+        "name": "Remember the state of the lights",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "b7d8f44f2afd5d17",
+            "3c4d921d31d1185c",
+            "2972cec3e50e9095",
+            "404f37836b18f6a1",
+            "30ab15fbe89d6bb3",
+            "585d5b4d6af02ff8",
+            "4fdc8aee5c18b9b6",
+            "47fb9c784aac429c",
+            "9896d9de20bba0a0",
+            "68929822d63b4cba",
+            "31328bc4cc454fe7",
+            "58c7205a8dc6a24d",
+            "c1d8ef7c9be7379a",
+            "c859808baaa2d320",
+            "cfd3819fe0730877",
+            "c977501343ac957d"
+        ],
+        "x": 14,
+        "y": 119,
+        "w": 1212,
+        "h": 322
+    },
+    {
+        "id": "fc6188a3ad87dd8c",
+        "type": "group",
+        "z": "d399aa74f25a7387",
+        "name": "Set flow.occupied ",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ae95df48e6774ca9",
+            "1386dde1ce316c5a",
+            "e3d9a7c238f0cce1",
+            "c0c740dd647a7fc2",
+            "e1de90e4d5e2bff4",
+            "638c9ce87486f3c4",
+            "20c797aa7e5dc8b8",
+            "d88b75c59ceb859b",
+            "2c60d9bcc7abcf48",
+            "3463eb48f33569bb",
+            "d1b7a633fab81ac0",
+            "470bebc4ed604e3e",
+            "f165a00a282188e0",
+            "30a60397bab91527",
+            "8f4bc83b84fabe08",
+            "ddc5a2f065386db9",
+            "9e9775bff89a0ff2"
+        ],
+        "x": 14,
+        "y": 799,
+        "w": 1092,
+        "h": 322
+    },
+    {
+        "id": "ca6ed0f3372c9cb9",
+        "type": "group",
+        "z": "d399aa74f25a7387",
+        "name": "Door Sensor",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "48b9d8c329a0eae1",
+            "c5298aca21f5fea8",
+            "65dd3e121119b93c",
+            "010dce1c3c1cc1a2",
+            "d92f8b913474b213",
+            "94c52eecd081edb3",
+            "94ee4701d38970ca"
+        ],
+        "x": 14,
+        "y": 479,
+        "w": 552,
+        "h": 222
+    },
+    {
+        "id": "e5297f20f11ad127",
+        "type": "group",
+        "z": "d399aa74f25a7387",
+        "name": "Motion sensor",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "7b3712573b04bb76",
+            "a3613fdc9681b69a",
+            "730ddf34f519dc99",
+            "1654ca2026772b0e",
+            "13990ea6021ee330",
+            "9c3b18cb9888f2b9",
+            "404a30a77667b853"
+        ],
+        "x": 604,
+        "y": 479,
+        "w": 502,
+        "h": 282
+    },
+    {
+        "id": "fe7b6ef30fc2df5f",
+        "type": "group",
+        "z": "d399aa74f25a7387",
+        "name": "Control WLED",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "c57ffe675358080d",
+            "3fbd11c38dd74ae2",
+            "a4f4f0a4e19f456e",
+            "d6f17223d8ecf18a",
+            "5fb68f55bd91f506",
+            "0dc5dde399936a30",
+            "1b98628514f57fa2",
+            "4b5951c034a97e2b",
+            "748130de6b2a4f60",
+            "ffca6e0e2892fd71",
+            "176a9a1c295a5055",
+            "a79625d9f0650de1",
+            "a6be6ef61898a2cb"
+        ],
+        "x": 134,
+        "y": 1159,
+        "w": 972,
+        "h": 302
+    },
+    {
+        "id": "a61ccdf1e19f39bb",
+        "type": "group",
+        "z": "d399aa74f25a7387",
+        "name": "When both lights are on also turn on bright WLED ",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "d935ec6a31bf2778",
+            "a218358134514ef9",
+            "400bf004d1f8af70",
+            "d56515d2d6326631",
+            "c112ecfa658f8ce1"
+        ],
+        "x": 144,
+        "y": 1499,
+        "w": 602,
+        "h": 122
+    },
+    {
+        "id": "b7d8f44f2afd5d17",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ceiling_light",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 160,
+        "wires": [
+            [
+                "c1d8ef7c9be7379a",
+                "2972cec3e50e9095",
+                "c859808baaa2d320"
+            ]
+        ]
+    },
+    {
+        "id": "3c4d921d31d1185c",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "mirror_light",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 200,
+        "wires": [
+            [
+                "58c7205a8dc6a24d",
+                "2972cec3e50e9095",
+                "c859808baaa2d320"
+            ]
+        ]
+    },
+    {
+        "id": "2972cec3e50e9095",
+        "type": "function",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "any light on?",
+        "func": "var ceiling_light = flow.get(\"ceiling_light\");\nvar mirror_light = flow.get(\"mirror_light\");\nmsg.topic = \"any_light\"\nif (ceiling_light || mirror_light) {\n    msg.payload = true;\n    flow.set(\"any_lights\", true);\n} else {\n    msg.payload = false;\n    flow.set(\"any_lights\", false);\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 280,
+        "wires": [
+            [
+                "31328bc4cc454fe7"
+            ]
+        ]
+    },
+    {
+        "id": "48b9d8c329a0eae1",
+        "type": "mqtt in",
+        "z": "d399aa74f25a7387",
+        "g": "ca6ed0f3372c9cb9",
+        "name": "Door sensor",
+        "topic": "zigbee2mqtt/bathroom/bathroom_door_sensor",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "64ef731ad709e5af",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 520,
+        "wires": [
+            [
+                "94c52eecd081edb3"
+            ]
+        ]
+    },
+    {
+        "id": "7b3712573b04bb76",
+        "type": "mqtt in",
+        "z": "d399aa74f25a7387",
+        "g": "e5297f20f11ad127",
+        "name": "Motion Sensor",
+        "topic": "zigbee2mqtt/bathroom/bathroom_motion_sensor",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "64ef731ad709e5af",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 700,
+        "y": 520,
+        "wires": [
+            [
+                "a3613fdc9681b69a"
+            ]
+        ]
+    },
+    {
+        "id": "c5298aca21f5fea8",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "ca6ed0f3372c9cb9",
+        "name": "Set flow.door_closed",
+        "rules": [
+            {
+                "t": "set",
+                "p": "door_closed",
+                "pt": "flow",
+                "to": "payload.contact",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 180,
+        "y": 600,
+        "wires": [
+            [
+                "65dd3e121119b93c"
+            ]
+        ]
+    },
+    {
+        "id": "ae95df48e6774ca9",
+        "type": "trigger",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Set Temporarily",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "10",
+        "extend": true,
+        "overrideDelay": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 760,
+        "y": 920,
+        "wires": [
+            [
+                "1386dde1ce316c5a"
+            ]
+        ]
+    },
+    {
+        "id": "1386dde1ce316c5a",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "set flow.occupied",
+        "rules": [
+            {
+                "t": "set",
+                "p": "occupied",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 960,
+        "wires": [
+            [
+                "d1b7a633fab81ac0",
+                "9e9775bff89a0ff2"
+            ]
+        ]
+    },
+    {
+        "id": "e3d9a7c238f0cce1",
+        "type": "comment",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "If door is closed after motion is detected set occupied for 15 min",
+        "info": "",
+        "x": 350,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "c0c740dd647a7fc2",
+        "type": "comment",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "If motion is detected after door is closed set occupied for 30 min",
+        "info": "",
+        "x": 350,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "e1de90e4d5e2bff4",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Delay 15 min",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "900000",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 980,
+        "wires": [
+            [
+                "ae95df48e6774ca9"
+            ]
+        ]
+    },
+    {
+        "id": "638c9ce87486f3c4",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Delay 30 min",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "1800000",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 880,
+        "wires": [
+            [
+                "ae95df48e6774ca9"
+            ]
+        ]
+    },
+    {
+        "id": "c57ffe675358080d",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "occupied: OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "off",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "occupied",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "transition",
+                "pt": "msg",
+                "to": "1500",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 1380,
+        "wires": [
+            [
+                "176a9a1c295a5055"
+            ]
+        ]
+    },
+    {
+        "id": "a3613fdc9681b69a",
+        "type": "switch",
+        "z": "d399aa74f25a7387",
+        "g": "e5297f20f11ad127",
+        "name": "Motion detected?",
+        "property": "payload.occupancy",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 910,
+        "y": 520,
+        "wires": [
+            [
+                "9c3b18cb9888f2b9"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3fbd11c38dd74ae2",
+        "type": "switch",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "Lights Off?",
+        "property": "any_lights",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 1260,
+        "wires": [
+            [
+                "a4f4f0a4e19f456e"
+            ]
+        ]
+    },
+    {
+        "id": "a4f4f0a4e19f456e",
+        "type": "switch",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "Occupied?",
+        "property": "occupied",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 1260,
+        "wires": [
+            [
+                "ffca6e0e2892fd71"
+            ],
+            [
+                "a79625d9f0650de1"
+            ]
+        ]
+    },
+    {
+        "id": "65dd3e121119b93c",
+        "type": "switch",
+        "z": "d399aa74f25a7387",
+        "g": "ca6ed0f3372c9cb9",
+        "name": "Door closed?",
+        "property": "payload.contact",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 150,
+        "y": 640,
+        "wires": [
+            [
+                "010dce1c3c1cc1a2"
+            ],
+            [
+                "d92f8b913474b213"
+            ]
+        ]
+    },
+    {
+        "id": "20c797aa7e5dc8b8",
+        "type": "switch",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Motion detected?",
+        "property": "motion_detected",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 330,
+        "y": 980,
+        "wires": [
+            [
+                "e1de90e4d5e2bff4"
+            ]
+        ]
+    },
+    {
+        "id": "d88b75c59ceb859b",
+        "type": "switch",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Door closed?",
+        "property": "door_closed",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 310,
+        "y": 880,
+        "wires": [
+            [
+                "638c9ce87486f3c4"
+            ]
+        ]
+    },
+    {
+        "id": "010dce1c3c1cc1a2",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "ca6ed0f3372c9cb9",
+        "name": "Door closed",
+        "mode": "link",
+        "links": [
+            "2c60d9bcc7abcf48",
+            "1379945c445c151b"
+        ],
+        "x": 470,
+        "y": 620,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "2c60d9bcc7abcf48",
+        "type": "link in",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Door closed",
+        "links": [
+            "010dce1c3c1cc1a2",
+            "c874903e17bfcb57"
+        ],
+        "x": 110,
+        "y": 980,
+        "wires": [
+            [
+                "20c797aa7e5dc8b8"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "3463eb48f33569bb",
+        "type": "link in",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Motion detected",
+        "links": [
+            "730ddf34f519dc99",
+            "14f778e2a0a3d570"
+        ],
+        "x": 120,
+        "y": 880,
+        "wires": [
+            [
+                "d88b75c59ceb859b"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "730ddf34f519dc99",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "e5297f20f11ad127",
+        "name": "Motion detected",
+        "mode": "link",
+        "links": [
+            "3463eb48f33569bb",
+            "d6f17223d8ecf18a"
+        ],
+        "x": 1000,
+        "y": 660,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "d92f8b913474b213",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "ca6ed0f3372c9cb9",
+        "name": "Door opened",
+        "mode": "link",
+        "links": [
+            "30a60397bab91527"
+        ],
+        "x": 470,
+        "y": 660,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "d1b7a633fab81ac0",
+        "type": "switch",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "is occupied?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 750,
+        "y": 1000,
+        "wires": [
+            [
+                "470bebc4ed604e3e"
+            ],
+            [
+                "f165a00a282188e0"
+            ]
+        ]
+    },
+    {
+        "id": "470bebc4ed604e3e",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Occupied",
+        "mode": "link",
+        "links": [
+            "5fb68f55bd91f506"
+        ],
+        "x": 960,
+        "y": 1020,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "f165a00a282188e0",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Unoccupied",
+        "mode": "link",
+        "links": [
+            "1b98628514f57fa2"
+        ],
+        "x": 970,
+        "y": 1060,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "1654ca2026772b0e",
+        "type": "trigger",
+        "z": "d399aa74f25a7387",
+        "g": "e5297f20f11ad127",
+        "name": "",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "3",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 2,
+        "x": 710,
+        "y": 660,
+        "wires": [
+            [
+                "730ddf34f519dc99"
+            ],
+            [
+                "404a30a77667b853"
+            ]
+        ]
+    },
+    {
+        "id": "13990ea6021ee330",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "e5297f20f11ad127",
+        "name": "Motion timeout",
+        "mode": "link",
+        "links": [
+            "4b5951c034a97e2b"
+        ],
+        "x": 1000,
+        "y": 720,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "d6f17223d8ecf18a",
+        "type": "link in",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "Motion detected",
+        "links": [
+            "730ddf34f519dc99",
+            "14f778e2a0a3d570"
+        ],
+        "x": 260,
+        "y": 1260,
+        "wires": [
+            [
+                "3fbd11c38dd74ae2"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "5fb68f55bd91f506",
+        "type": "link in",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "Occupied",
+        "links": [
+            "470bebc4ed604e3e"
+        ],
+        "x": 280,
+        "y": 1220,
+        "wires": [
+            [
+                "3fbd11c38dd74ae2"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "30a60397bab91527",
+        "type": "link in",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Door opened",
+        "links": [
+            "d92f8b913474b213",
+            "5b5ba415f65e159e"
+        ],
+        "x": 110,
+        "y": 1080,
+        "wires": [
+            [
+                "8f4bc83b84fabe08"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "8f4bc83b84fabe08",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "Delay 1 sec",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "1000",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 1080,
+        "wires": [
+            [
+                "ae95df48e6774ca9"
+            ]
+        ]
+    },
+    {
+        "id": "ddc5a2f065386db9",
+        "type": "comment",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "If door is opened clear occupied after 1 sec.",
+        "info": "",
+        "x": 410,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "0dc5dde399936a30",
+        "type": "comment",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "Turn lights on if motion detected or occupied",
+        "info": "",
+        "x": 590,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "1b98628514f57fa2",
+        "type": "link in",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "Unoccupied",
+        "links": [
+            "f165a00a282188e0"
+        ],
+        "x": 270,
+        "y": 1380,
+        "wires": [
+            [
+                "c57ffe675358080d",
+                "a6be6ef61898a2cb"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "4b5951c034a97e2b",
+        "type": "link in",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "Motion timeout",
+        "links": [
+            "13990ea6021ee330",
+            "91268f7b7764495d"
+        ],
+        "x": 260,
+        "y": 1420,
+        "wires": [
+            [
+                "a6be6ef61898a2cb"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "748130de6b2a4f60",
+        "type": "comment",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "Turn lights off if occupation ends or if motion timeout and NOT occupied.",
+        "info": "",
+        "x": 410,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "404f37836b18f6a1",
+        "type": "subflow:75daca353c3848d5",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "Bathroom",
+        "env": [
+            {
+                "name": "API_TOPIC",
+                "value": "bathroom/wled_bathroom/api",
+                "type": "str"
+            },
+            {
+                "name": "G_TOPIC",
+                "value": "bathroom/wled_bathroom/g",
+                "type": "str"
+            },
+            {
+                "name": "Topic",
+                "value": "bathroom/wled_bathroom",
+                "type": "str"
+            }
+        ],
+        "x": 360,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "30ab15fbe89d6bb3",
+        "type": "Tasmota Switch",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "broker": "d1dcd532ba55f903",
+        "device": "lights_bathroom",
+        "name": "Bathroom Light",
+        "outputs": 2,
+        "uidisabler": false,
+        "fullTopic": "bathroom/%topic%/%prefix%/",
+        "cmndPrefix": "",
+        "statPrefix": "",
+        "telePrefix": "",
+        "qos": 1,
+        "retain": false,
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "b7d8f44f2afd5d17"
+            ],
+            [
+                "3c4d921d31d1185c"
+            ]
+        ]
+    },
+    {
+        "id": "585d5b4d6af02ff8",
+        "type": "link in",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "",
+        "links": [
+            "97492b93779478f3"
+        ],
+        "x": 55,
+        "y": 220,
+        "wires": [
+            [
+                "4fdc8aee5c18b9b6",
+                "47fb9c784aac429c"
+            ]
+        ]
+    },
+    {
+        "id": "4fdc8aee5c18b9b6",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "All switches",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "switch0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "30ab15fbe89d6bb3"
+            ]
+        ]
+    },
+    {
+        "id": "47fb9c784aac429c",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "Reset",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "reset",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 360,
+        "wires": [
+            [
+                "404f37836b18f6a1"
+            ]
+        ]
+    },
+    {
+        "id": "ffca6e0e2892fd71",
+        "type": "subflow:cb18316975319a9f",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "Preset 3",
+        "env": [
+            {
+                "name": "topic",
+                "value": "occupied",
+                "type": "str"
+            },
+            {
+                "name": "priority",
+                "value": "20",
+                "type": "num"
+            },
+            {
+                "name": "preset",
+                "value": "3",
+                "type": "num"
+            },
+            {
+                "name": "transition",
+                "value": "2000",
+                "type": "num"
+            }
+        ],
+        "x": 900,
+        "y": 1240,
+        "wires": [
+            [
+                "176a9a1c295a5055"
+            ]
+        ]
+    },
+    {
+        "id": "9896d9de20bba0a0",
+        "type": "link in",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "",
+        "links": [
+            "176a9a1c295a5055",
+            "0e2ebe2e6cd54116",
+            "a218358134514ef9"
+        ],
+        "x": 245,
+        "y": 400,
+        "wires": [
+            [
+                "404f37836b18f6a1"
+            ]
+        ]
+    },
+    {
+        "id": "176a9a1c295a5055",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "9896d9de20bba0a0"
+        ],
+        "x": 1065,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "a79625d9f0650de1",
+        "type": "subflow:cb18316975319a9f",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "Preset 5",
+        "env": [
+            {
+                "name": "topic",
+                "value": "motion",
+                "type": "str"
+            },
+            {
+                "name": "priority",
+                "value": "10",
+                "type": "num"
+            },
+            {
+                "name": "preset",
+                "value": "5",
+                "type": "num"
+            },
+            {
+                "name": "transition",
+                "value": "300",
+                "type": "num"
+            }
+        ],
+        "x": 900,
+        "y": 1280,
+        "wires": [
+            [
+                "176a9a1c295a5055"
+            ]
+        ]
+    },
+    {
+        "id": "a6be6ef61898a2cb",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "fe7b6ef30fc2df5f",
+        "name": "motion: OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "off",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "motion",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "transition",
+                "pt": "msg",
+                "to": "5000",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 1420,
+        "wires": [
+            [
+                "176a9a1c295a5055"
+            ]
+        ]
+    },
+    {
+        "id": "9e9775bff89a0ff2",
+        "type": "ha-entity",
+        "z": "d399aa74f25a7387",
+        "g": "fc6188a3ad87dd8c",
+        "name": "bathroom_occupied",
+        "server": "e24edc3790c69a93",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "binary_sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "bathroom_occupied"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": "mdi:alert-circle"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "",
+        "outputPayloadType": "str",
+        "x": 990,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "68929822d63b4cba",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "Any Lights",
+        "mode": "link",
+        "links": [
+            "79caa11c70aeeda0"
+        ],
+        "x": 1130,
+        "y": 280,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "d935ec6a31bf2778",
+        "type": "subflow:cb18316975319a9f",
+        "z": "d399aa74f25a7387",
+        "g": "a61ccdf1e19f39bb",
+        "name": "Preset 1",
+        "env": [
+            {
+                "name": "topic",
+                "value": "both_lights",
+                "type": "str"
+            },
+            {
+                "name": "priority",
+                "value": "30",
+                "type": "num"
+            },
+            {
+                "name": "preset",
+                "value": "1",
+                "type": "num"
+            },
+            {
+                "name": "transition",
+                "value": "200",
+                "type": "num"
+            }
+        ],
+        "x": 560,
+        "y": 1540,
+        "wires": [
+            [
+                "a218358134514ef9"
+            ]
+        ]
+    },
+    {
+        "id": "a218358134514ef9",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "a61ccdf1e19f39bb",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "9896d9de20bba0a0"
+        ],
+        "x": 705,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "400bf004d1f8af70",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "a61ccdf1e19f39bb",
+        "name": "both_lights: OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "off",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "both_lights",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "transition",
+                "pt": "msg",
+                "to": "300",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 1580,
+        "wires": [
+            [
+                "a218358134514ef9"
+            ]
+        ]
+    },
+    {
+        "id": "31328bc4cc454fe7",
+        "type": "rbe",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 990,
+        "y": 280,
+        "wires": [
+            [
+                "68929822d63b4cba"
+            ]
+        ]
+    },
+    {
+        "id": "58c7205a8dc6a24d",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "MirrorLight",
+        "mode": "link",
+        "links": [],
+        "x": 830,
+        "y": 200,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "c1d8ef7c9be7379a",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "CeilingLight",
+        "mode": "link",
+        "links": [
+            "1b0c61ed87b34ddc"
+        ],
+        "x": 830,
+        "y": 160,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "c859808baaa2d320",
+        "type": "function",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "all lights on?",
+        "func": "var ceiling_light = flow.get(\"ceiling_light\");\nvar mirror_light = flow.get(\"mirror_light\");\nmsg.topic = \"all_lights\";\nif (ceiling_light && mirror_light) {\n    msg.payload = true;\n    flow.set(\"all_lights\", true);\n} else {\n    msg.payload = false;\n    flow.set(\"all_lights\", false);\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 240,
+        "wires": [
+            [
+                "cfd3819fe0730877"
+            ]
+        ]
+    },
+    {
+        "id": "cfd3819fe0730877",
+        "type": "rbe",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 990,
+        "y": 240,
+        "wires": [
+            [
+                "c977501343ac957d"
+            ]
+        ]
+    },
+    {
+        "id": "c977501343ac957d",
+        "type": "link out",
+        "z": "d399aa74f25a7387",
+        "g": "34dc24c24a2fc1b1",
+        "name": "All Lights",
+        "mode": "link",
+        "links": [
+            "d56515d2d6326631"
+        ],
+        "x": 1140,
+        "y": 240,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "d56515d2d6326631",
+        "type": "link in",
+        "z": "d399aa74f25a7387",
+        "g": "a61ccdf1e19f39bb",
+        "name": "",
+        "links": [
+            "c977501343ac957d",
+            "5e5db58b5033459b"
+        ],
+        "x": 185,
+        "y": 1560,
+        "wires": [
+            [
+                "c112ecfa658f8ce1"
+            ]
+        ]
+    },
+    {
+        "id": "c112ecfa658f8ce1",
+        "type": "switch",
+        "z": "d399aa74f25a7387",
+        "g": "a61ccdf1e19f39bb",
+        "name": "both on?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 320,
+        "y": 1560,
+        "wires": [
+            [
+                "d935ec6a31bf2778"
+            ],
+            [
+                "400bf004d1f8af70"
+            ]
+        ]
+    },
+    {
+        "id": "65d5e0789384eaf2",
+        "type": "time-comp",
+        "z": "d399aa74f25a7387",
+        "outputs": 5,
+        "name": "",
+        "positionConfig": "0669d12abb83c23f",
+        "input": "payload",
+        "inputType": "msgPayload",
+        "inputFormat": "0",
+        "inputNext": false,
+        "inputOffset": 0,
+        "inputOffsetType": "none",
+        "inputOffsetMultiplier": 60000,
+        "rules": [
+            {
+                "operator": "5",
+                "operatorType": "11,12,13,14,15,16,17,18",
+                "operatorText": "<      (lesser)",
+                "operandType": "entered",
+                "operandValue": "7:00",
+                "format": "ddd MMM dd yyyy HH:mm:ss",
+                "formatSelection": "99",
+                "next": false,
+                "offsetType": "none",
+                "offsetValue": "",
+                "multiplier": "60000",
+                "propertyType": "none",
+                "propertyValue": ""
+            },
+            {
+                "operator": "5",
+                "operatorType": "11,12,13,14,15,16,17,18",
+                "operatorText": "<      (lesser)",
+                "operandType": "entered",
+                "operandValue": "11:00",
+                "format": "ddd MMM dd yyyy HH:mm:ss",
+                "formatSelection": "99",
+                "next": false,
+                "offsetType": "none",
+                "offsetValue": "",
+                "multiplier": "60000",
+                "propertyType": "none",
+                "propertyValue": ""
+            },
+            {
+                "operator": "5",
+                "operatorType": "11,12,13,14,15,16,17,18",
+                "operatorText": "<      (lesser)",
+                "operandType": "entered",
+                "operandValue": "19:00",
+                "format": "ddd MMM dd yyyy HH:mm:ss",
+                "formatSelection": "99",
+                "next": false,
+                "offsetType": "none",
+                "offsetValue": "",
+                "multiplier": "60000",
+                "propertyType": "none",
+                "propertyValue": ""
+            },
+            {
+                "operator": "5",
+                "operatorType": "11,12,13,14,15,16,17,18",
+                "operatorText": "<      (lesser)",
+                "operandType": "entered",
+                "operandValue": "23:00",
+                "format": "ddd MMM dd yyyy HH:mm:ss",
+                "formatSelection": "99",
+                "next": false,
+                "offsetType": "none",
+                "offsetValue": "",
+                "multiplier": "60000",
+                "propertyType": "none",
+                "propertyValue": ""
+            }
+        ],
+        "checkall": "true",
+        "results": [],
+        "x": 1060,
+        "y": 1780,
+        "wires": [
+            [
+                "50d062d576eae814"
+            ],
+            [
+                "a4accd9b555dd3a8"
+            ],
+            [
+                "c052ecf576a67b80"
+            ],
+            [
+                "babde39ab87b52fb"
+            ],
+            [
+                "50d062d576eae814"
+            ]
+        ]
+    },
+    {
+        "id": "a4accd9b555dd3a8",
+        "type": "subflow:cb18316975319a9f",
+        "z": "d399aa74f25a7387",
+        "name": "Preset 4",
+        "env": [
+            {
+                "name": "topic",
+                "value": "occupied",
+                "type": "str"
+            },
+            {
+                "name": "priority",
+                "value": "20",
+                "type": "num"
+            },
+            {
+                "name": "preset",
+                "value": "4",
+                "type": "num"
+            },
+            {
+                "name": "transition",
+                "value": "2000",
+                "type": "num"
+            }
+        ],
+        "x": 1340,
+        "y": 1740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c052ecf576a67b80",
+        "type": "subflow:cb18316975319a9f",
+        "z": "d399aa74f25a7387",
+        "name": "Preset 1",
+        "env": [
+            {
+                "name": "topic",
+                "value": "occupied",
+                "type": "str"
+            },
+            {
+                "name": "priority",
+                "value": "20",
+                "type": "num"
+            },
+            {
+                "name": "preset",
+                "value": "1",
+                "type": "num"
+            },
+            {
+                "name": "transition",
+                "value": "2000",
+                "type": "num"
+            }
+        ],
+        "x": 1340,
+        "y": 1780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "babde39ab87b52fb",
+        "type": "subflow:cb18316975319a9f",
+        "z": "d399aa74f25a7387",
+        "name": "Preset 3",
+        "env": [
+            {
+                "name": "topic",
+                "value": "occupied",
+                "type": "str"
+            },
+            {
+                "name": "priority",
+                "value": "20",
+                "type": "num"
+            },
+            {
+                "name": "preset",
+                "value": "3",
+                "type": "num"
+            },
+            {
+                "name": "transition",
+                "value": "2000",
+                "type": "num"
+            }
+        ],
+        "x": 1340,
+        "y": 1820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "50d062d576eae814",
+        "type": "subflow:cb18316975319a9f",
+        "z": "d399aa74f25a7387",
+        "name": "Preset 5",
+        "env": [
+            {
+                "name": "topic",
+                "value": "occupied",
+                "type": "str"
+            },
+            {
+                "name": "priority",
+                "value": "20",
+                "type": "num"
+            },
+            {
+                "name": "preset",
+                "value": "5",
+                "type": "num"
+            },
+            {
+                "name": "transition",
+                "value": "2000",
+                "type": "num"
+            }
+        ],
+        "x": 1340,
+        "y": 1860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8bbbed75645c81e8",
+        "type": "sun-position",
+        "z": "d399aa74f25a7387",
+        "name": "",
+        "positionConfig": "0669d12abb83c23f",
+        "rules": [],
+        "onlyOnChange": "true",
+        "topic": "",
+        "outputs": 1,
+        "start": "",
+        "startType": "none",
+        "startOffset": 0,
+        "startOffsetType": "none",
+        "startOffsetMultiplier": 60000,
+        "end": "",
+        "endType": "none",
+        "endOffset": 0,
+        "endOffsetType": "none",
+        "endOffsetMultiplier": 60000,
+        "x": 1110,
+        "y": 1560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c3b18cb9888f2b9",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "e5297f20f11ad127",
+        "name": "Set flow.motion_detected = true",
+        "rules": [
+            {
+                "t": "set",
+                "p": "motion_detected",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 600,
+        "wires": [
+            [
+                "1654ca2026772b0e"
+            ]
+        ]
+    },
+    {
+        "id": "404a30a77667b853",
+        "type": "change",
+        "z": "d399aa74f25a7387",
+        "g": "e5297f20f11ad127",
+        "name": "Set flow.motion_detected = false",
+        "rules": [
+            {
+                "t": "set",
+                "p": "motion_detected",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 720,
+        "wires": [
+            [
+                "13990ea6021ee330"
+            ]
+        ]
+    },
+    {
+        "id": "94c52eecd081edb3",
+        "type": "trigger",
+        "z": "d399aa74f25a7387",
+        "g": "ca6ed0f3372c9cb9",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "payl",
+        "duration": "500",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 280,
+        "y": 520,
+        "wires": [
+            [
+                "94ee4701d38970ca"
+            ]
+        ]
+    },
+    {
+        "id": "94ee4701d38970ca",
+        "type": "rbe",
+        "z": "d399aa74f25a7387",
+        "g": "ca6ed0f3372c9cb9",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload.contact",
+        "topi": "topic",
+        "x": 430,
+        "y": 520,
+        "wires": [
+            [
+                "c5298aca21f5fea8"
+            ]
+        ]
+    },
+    {
+        "id": "64ef731ad709e5af",
+        "type": "mqtt-broker",
+        "name": "mosquitto",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d1dcd532ba55f903",
+        "type": "tasmota-mqtt-broker",
+        "name": "Mosquitto",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "keepalive": "60",
+        "cleansession": true
+    },
+    {
+        "id": "e24edc3790c69a93",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 2,
+        "addon": false,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": "30"
+    },
+    {
+        "id": "0669d12abb83c23f",
+        "type": "position-config",
+        "name": "",
+        "isValide": "true",
+        "longitude": "0",
+        "latitude": "0",
+        "angleType": "deg",
+        "timeZoneOffset": "99",
+        "timeZoneDST": "0",
+        "stateTimeFormat": "3",
+        "stateDateFormat": "12",
+        "contextStore": ""
+    }
+]
